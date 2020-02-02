@@ -1,0 +1,71 @@
+# Entitlement Service
+
+In the previous architecture all services would connect to the Entitlement service and
+verify the customer's license, permissions and abilities.  This would happen every business
+request.
+
+In the new architecture this data has been turned into claims and is available in the customer's
+JWT so there is no longer any need for direct communication to Entitlements.
+
+## Request for Entitlements
+
+When the customer contacts the Superbiz API Gateway and performs a `password` or `refresh`
+grant, the Gateway will verify the credentials (password or refresh token) and afterwards
+will call this Entitlements service to ask for any entitlements that should apply to the given
+customer.
+
+The Entitlements service will respond to the Gateway with a payload similar to the following
+
+----
+{
+  "entitlements": {
+    "license-key": "ZLwyLQBGsTyEuPOCwXN62WlPUhE",
+    "license-expiration": 1612166400000,
+    "license-active": true
+  }
+}
+----
+
+## Resulting JWT with Entitlements
+
+The Gateway will add the `entitlements` claim into the constructed JWT, resulting in a
+token that looks similar to the following.
+
+----
+{
+  "sub": "1234567890",
+  "name": "John Doe",
+  "iat": 1516239022,
+  "entitlements": {
+    "license-key": "ZLwyLQBGsTyEuPOCwXN62WlPUhE",
+    "license-expiration": 1612166400000,
+    "license-active": true
+  }
+}
+----
+
+## JWT Design Nuances
+
+It is possible to give the Gateway a flat JSON map such as the following
+
+----
+{
+  "license-key": "ZLwyLQBGsTyEuPOCwXN62WlPUhE",
+  "license-expiration": 1612166400000,
+  "license-active": true
+}
+----
+
+Resulting in a completed JWT like the following:
+
+----
+{
+  "sub": "1234567890",
+  "name": "John Doe",
+  "iat": 1516239022,
+  "license-key": "ZLwyLQBGsTyEuPOCwXN62WlPUhE",
+  "license-expiration": 1612166400000,
+  "license-active": true
+}
+----
+

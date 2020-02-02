@@ -1,0 +1,37 @@
+# HDS Service
+
+The HDS Service holds information and data that all customers with a valid license should
+be able to access.  It runs in our Superbiz backend and there is just one cluster maintained
+by Superbiz, available to all paying customers.
+
+Customers will setup and run their own IQ service on their hardware and network.  This IQ
+service instance will connect remotely to the Superbiz API Gateway for authentication and
+all future business calls.  The Superbiz API Gateway will route the appropriate calls to
+this running HDS service after verifying the customer's request is valid.
+
+## Entitlement Claims
+
+In the previous architecture our HDS service would connect to the Entitlement service and
+verify the customer's license, permissions and abilities.  This would happen every business
+request.
+
+In the new architecture this data has been turned into claims and is available in the customer's
+JWT so there is no longer any need for direct communication from HDS to Entitlements.
+
+The HDS service requires a JWT that contains a claim called `entitlements` with a value
+that is a JSON map containing `license-key`, `license-expiration`, and `license-active`.
+
+----
+{
+  "sub": "1234567890",
+  "name": "John Doe",
+  "iat": 1516239022,
+  "entitlements": {
+    "license-key": "ZLwyLQBGsTyEuPOCwXN62WlPUhE",
+    "license-expiration": 1612166400000,
+    "license-active": true
+  }
+}
+----
+
+In order to invoke the HDS service the license must not be expired or suspended (`license-active=false`)

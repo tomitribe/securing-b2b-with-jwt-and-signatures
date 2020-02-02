@@ -1,0 +1,7 @@
+# IQ Service
+
+The IQ Service represents a product the customer will install and run on their systems.
+It needs to connect back to the Superbiz systems and collect data from the HDS service.
+
+ * At startup we login and prove we are a valid user
+ * At runtime we send several requests signed with the symmetric key we got at login
