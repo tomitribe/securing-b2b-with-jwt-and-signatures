@@ -1,0 +1,22 @@
+//api/account/
+{
+  "username": "iq-service",
+  "email": "snoopy@superbiz.com",
+  "displayName": "IQ Service",
+  "type": "CLIENT",
+  "roles": [
+    {
+      "displayName": "iq",
+      "name": "iq",
+      "id": "iq"
+    }
+  ],
+  "credentials": {
+    "clientSecret": {
+      "active": true,
+      "value": "woodstock",
+      "oAuth2ProfileRef": "superbiz-pop",
+      "createdDate": "2019-03-29T20:22:01Z"
+    }
+  }
+}

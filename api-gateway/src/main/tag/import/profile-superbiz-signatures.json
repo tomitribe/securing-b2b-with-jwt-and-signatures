@@ -1,0 +1,25 @@
+//api/security/signature
+{
+  "dateTolerance": "",
+  "signatureAlgorithms": [
+    "hmac-sha256"
+  ],
+  "tags": [],
+  "signatureHeaders": [
+    {
+      "name": "(request-target)",
+      "activated": true
+    },
+    {
+      "name": "Date",
+      "activated": true
+    },
+    {
+      "name": "Digest",
+      "activated": false
+    }
+  ],
+  "signatureHeader": "Signature",
+  "name": "superbiz-signatures",
+  "id": "superbiz-signatures"
+}

@@ -1,0 +1,13 @@
+//api/route
+{
+  "name": "hds-route",
+  "modRewrite": "RewriteRule \"^/(hds/.*)$\" \"%{API:hds-service}/$1\" [P,auth]",
+  "profileRequiresAll": true,
+  "profiles": [
+    {
+      "id": "superbiz-pop"
+    }
+  ],
+  "index": 1,
+  "roleRequiresAll": true
+}

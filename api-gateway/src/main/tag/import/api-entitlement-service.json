@@ -1,0 +1,6 @@
+//api/http
+{
+  "name": "entitlement-service",
+    "endpoint": "http://localhost:7272",
+    "tags": []
+}

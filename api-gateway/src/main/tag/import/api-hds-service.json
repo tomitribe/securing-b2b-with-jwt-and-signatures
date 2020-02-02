@@ -1,0 +1,6 @@
+//api/http
+{
+  "name": "hds-service",
+    "endpoint": "http://localhost:7272",
+    "tags": []
+}
